@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.github.patarapolw'
-version = '0.1.0'
+version = '0.1.1'
 description = "A wrapper for mdbg.net's CC-CEDICT"
 
 repositories {
@@ -12,17 +12,15 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'org.xerial:sqlite-jdbc:3.25.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.0.0'
 }
 
-
-
-
 jar {
     manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version)
+        attributes(
+                'Implementation-Title': 'cedict',
+                'Implementation-Version': version)
     }
 }
