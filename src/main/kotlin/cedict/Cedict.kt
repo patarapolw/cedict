@@ -5,12 +5,12 @@ import java.sql.DriverManager
 import java.sql.SQLException
 
 class Cedict {
-    private val conn: Connection = DriverManager.getConnection("jdbc:sqlite:" + this::class.java.classLoader.getResource("cedict.db"))
+    private val conn: Connection = DriverManager.getConnection("jdbc:sqlite::resource:cedict.db")
 
     private val tableName = "cedict"
 
     private fun searchOne(s: String, col1: String): Map<Int, Pair<CedictEntry, Float>> {
-        val results = mutableMapOf<Int, Pair<CedictEntry, Float>>();
+        val results = mutableMapOf<Int, Pair<CedictEntry, Float>>()
 
         try {
             val preparedStatement = conn.prepareStatement("""
@@ -37,7 +37,7 @@ class Cedict {
     }
 
     fun searchChinese(s: String): List<CedictEntry> {
-        val results = mutableListOf<CedictEntry>();
+        val results = mutableListOf<CedictEntry>()
 
         try {
             val preparedStatement = conn.prepareStatement("""

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.patarapolw.cedict.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.patarapolw.cedict.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.patarapolw.cedict.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.patarapolw.cedict.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.patarapolw.cedict.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.patarapolw.cedict.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.github.patarapolw.cedict.iml" filepath="$PROJECT_DIR$/.idea/modules/io.github.patarapolw.cedict.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.github.patarapolw.cedict.main.iml" filepath="$PROJECT_DIR$/.idea/modules/io.github.patarapolw.cedict.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.github.patarapolw.cedict.test.iml" filepath="$PROJECT_DIR$/.idea/modules/io.github.patarapolw.cedict.test.iml" />
     </modules>
   </component>
 </project>

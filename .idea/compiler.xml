@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="com.github.patarapolw.cedict.main" target="11" />
       <module name="com.github.patarapolw.cedict.test" target="11" />
+      <module name="io.github.patarapolw.cedict.main" target="11" />
+      <module name="io.github.patarapolw.cedict.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
