@@ -4,10 +4,15 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-class Cedict {
-    private val conn: Connection = DriverManager.getConnection("jdbc:sqlite::resource:cedict.db")
-
+class Cedict (connectionUrl: String) {
+    private val conn: Connection = DriverManager.getConnection(connectionUrl)
     private val tableName = "cedict"
+    data class CedictEntry internal constructor (
+            val traditional: String?,
+            val simplified: String,
+            val pinyin: String,
+            val english: String
+    )
 
     private fun searchOne(s: String, col1: String): Map<Int, Pair<CedictEntry, Float>> {
         val results = mutableMapOf<Int, Pair<CedictEntry, Float>>()
@@ -22,8 +27,14 @@ class Cedict {
             val resultSet = preparedStatement.executeQuery()
 
             while (resultSet.next()) {
+                var trad: String? = null
+                try {
+                    trad = resultSet.getString("traditional")
+                } catch (e: SQLException) {
+                }
+
                 results[resultSet.getInt("id")] = Pair(CedictEntry(
-                        traditional = resultSet.getByte("traditional").takeIf { it.toInt() != 0 }.toString(),
+                        traditional = trad,
                         simplified = resultSet.getString("simplified"),
                         pinyin = resultSet.getString("pinyin"),
                         english = resultSet.getString("english")
@@ -50,8 +61,48 @@ class Cedict {
 
             val resultSet = preparedStatement.executeQuery()
             while (resultSet.next()) {
+                var trad: String? = null
+                try {
+                    trad = resultSet.getString("traditional")
+                } catch (e: SQLException) {
+                }
+
                 results.add(CedictEntry(
-                        traditional = resultSet.getByte("traditional").takeIf { it.toInt() != 0 }.toString(),
+                        traditional = trad,
+                        simplified = resultSet.getString("simplified"),
+                        pinyin = resultSet.getString("pinyin"),
+                        english = resultSet.getString("english")
+                ))
+            }
+        } catch (e: SQLException) {
+            println(e.message)
+        }
+
+        return results
+    }
+
+    fun searchChineseMatch(s: String): List<CedictEntry> {
+        val results = mutableListOf<CedictEntry>()
+
+        try {
+            val preparedStatement = conn.prepareStatement("""
+                SELECT * FROM $tableName
+                WHERE simplified = ? OR traditional = ?
+                ORDER BY frequency DESC
+            """.trimIndent())
+            preparedStatement.setString(1, s)
+            preparedStatement.setString(2, s)
+
+            val resultSet = preparedStatement.executeQuery()
+            while (resultSet.next()) {
+                var trad: String? = null
+                try {
+                    trad = resultSet.getString("traditional")
+                } catch (e: SQLException) {
+                }
+
+                results.add(CedictEntry(
+                        traditional = trad,
                         simplified = resultSet.getString("simplified"),
                         pinyin = resultSet.getString("pinyin"),
                         english = resultSet.getString("english")
