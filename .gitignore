@@ -156,3 +156,6 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/macos,gradle,kotlin,intellij
 
 gradle.properties
+.idea/
+*.iml
+*.ipr
