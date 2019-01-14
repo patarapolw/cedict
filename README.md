@@ -4,9 +4,17 @@ MDBG's CC-CEDICT wrapper for Kotlin.
 
 This is intended to work as a library.
 
-## Usage
+## Installation
 
-Download <https://github.com/patarapolw/cedict/blob/master/cedict.db?raw=true> and put it in `resources` folder.
+Add this to your dependencies.
+
+```groovy
+implementation 'io.github.patarapolw:cedict:0.1.4'
+```
+
+And, download <https://github.com/patarapolw/cedict/blob/master/cedict.db?raw=true> and put it in `resources` folder.
+
+## Usage
 
 ```kotlin
 import cedict.Cedict
